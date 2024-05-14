@@ -120,6 +120,7 @@ Return Value:
         FUNCTION_ENTRY MlasComputeSoftmaxOutputF32KernelAvx
 
         vbroadcastss ymm4,DWORD PTR [rdx]       # broadcast scale value
+        vrcpps ymm4, ymm4
         cmp     rsi,32
         jb      .LComputeSoftmaxOutput.ProcessRemainingCountBy8
 

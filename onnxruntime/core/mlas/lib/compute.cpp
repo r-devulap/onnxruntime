@@ -920,12 +920,12 @@ Return Value:
             // Normalize the softmax output.
             //
 
-            float Parameters[] = { 1.0f / Accumulation };
+            //float Parameters[] = { 1.0f / Accumulation };
 
 #if defined(MLAS_TARGET_AMD64) || defined(MLAS_TARGET_LARCH64)
-            GetMlasPlatform().ComputeSoftmaxOutputF32Kernel(Output, D, Parameters);
+            GetMlasPlatform().ComputeSoftmaxOutputF32Kernel(Output, D, &Accumulation);
 #else
-            MlasComputeSoftmaxOutputF32Kernel(Output, D, Parameters);
+            MlasComputeSoftmaxOutputF32Kernel(Output, D, &Accumulation);
 #endif
         }
 
