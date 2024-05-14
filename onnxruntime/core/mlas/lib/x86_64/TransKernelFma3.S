@@ -306,10 +306,13 @@ Return Value:
         vmaskmovps YMMWORD PTR [rsi],ymm3,ymm1
 
 .LComputeSumExp.ReduceAccumulator:
-        vhaddps ymm10,ymm10,ymm10
-        vhaddps ymm10,ymm10,ymm10
-        vextractf128 xmm0,ymm10,1
-        vaddss  xmm0,xmm0,xmm10
+        vmovaps ymm11, ymm10
+        vextractf128 xmm10, ymm10, 0x1
+        vaddps xmm11, xmm11, xmm10
+        vpermilps xmm10, xmm11, 177
+        vaddps xmm11, xmm11, xmm10
+        vpermilps xmm10, xmm11, 78
+        vaddps xmm0, xmm10, xmm11
 
         vzeroupper
         ret
